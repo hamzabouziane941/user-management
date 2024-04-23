@@ -52,7 +52,7 @@ public class RestErrorConstant {
     private Map<String, String> languageMessages;
 
     public String getByLocale(Locale locale, String... parameters) {
-      return String.format(languageMessages.get(locale.getLanguage()), parameters);
+      return String.format(languageMessages.get(locale.getLanguage()), (Object) parameters);
     }
   }
 
