@@ -7,6 +7,7 @@ import com.hb.organizationsubscription.appliation.port.in.CreateOrganizationUseC
 import com.hb.organizationsubscription.domain.Organization;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,11 @@ public class OrganizationController {
   private final OrganizationDtoMapper organizationDtoMapper;
 
   @PostMapping
-  void createOrganization(@RequestBody @Valid OrganizationDto organizationDto)
+  ResponseEntity<Void> createOrganization(@RequestBody @Valid OrganizationDto organizationDto)
       throws OrganizationCreationException {
     Organization organization = organizationDtoMapper.organizationDtoToOrganization(
         organizationDto);
     createOrganizationUseCase.createOrganization(organization);
+    return ResponseEntity.ok().build();
   }
 }

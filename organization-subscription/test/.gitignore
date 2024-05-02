@@ -1,7 +1,6 @@
 HELP.md
 .gradle
 build/
-docker/**/data/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -19,8 +18,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea/
-../.idea/
+.idea
 *.iws
 *.iml
 *.ipr
