@@ -4,7 +4,6 @@ import com.hb.organizationsubscription.adapters.driven.keycloak.config.KeycloakC
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,9 +21,6 @@ public class AuthenticationClient {
 
   private static final int ONE_SECOND_IN_MS = 1000;
   private static final int BEFORE_EXPIRATION_MS = 60000;
-
-  @Value("${keycloak.base-url}")
-  private String keycloakBaseUrl;
 
   private final RestTemplate restTemplate;
   private final KeycloakConfig keycloakConfig;
@@ -53,7 +49,7 @@ public class AuthenticationClient {
   }
 
   private String buildTokenAccessUrl() {
-    return UriComponentsBuilder.fromHttpUrl(keycloakBaseUrl)
+    return UriComponentsBuilder.fromHttpUrl(keycloakConfig.getBaseUrl())
         .pathSegment("realms", "master", "protocol", "openid-connect", "token").build()
         .toString();
   }

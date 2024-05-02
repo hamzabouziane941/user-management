@@ -1,0 +1,8 @@
+app-config:
+  authorization-server:
+      type: keycloak
+      base-url: http://localhost:8080
+      client-id: organization-management
+      client-secret: eQqBbzIMTrEBGolGWIFfFp31BkkKfjoq
+  url:
+    organization-subscription: http://localhost:8081

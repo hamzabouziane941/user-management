@@ -1,0 +1,72 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'se.thinkcode.cucumber-runner' version '0.0.8'
+}
+
+group = 'com.hb'
+version = '0.0.1-SNAPSHOT'
+
+ext {
+	cucumberVersion = '7.17.0'
+}
+
+java {
+	sourceCompatibility = '21'
+	targetCompatibility = '21'
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	cucumberRuntime {
+		extendsFrom testImplementation
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
+	implementation 'org.apache.commons:commons-lang3:3.14.0'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	implementation "io.cucumber:cucumber-java:${cucumberVersion}"
+	implementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+	implementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+
+	testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+	testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+
+	implementation group: 'commons-io', name: 'commons-io', version: '2.16.1'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.register('cucumberCli') {
+	dependsOn assemble, classes
+	doLast {
+		javaexec {
+			main = "io.cucumber.core.cli.Main"
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+			args = [
+					'--plugin', 'pretty',
+					'--plugin', 'html:target/cucumber-report.html',
+					'--glue', 'com.hb.test',
+					'src/main/resources/cucumber']
+		}
+	}
+}
+
+test {
+	useJUnitPlatform()
+
+	systemProperties(project.gradle.startParameter.systemPropertiesArgs)
+}
