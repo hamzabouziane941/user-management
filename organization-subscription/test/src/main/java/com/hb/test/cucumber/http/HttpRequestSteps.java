@@ -1,10 +1,7 @@
-package com.hb.test.http;
+package com.hb.test.cucumber.http;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.hb.test.http.WorkerClient;
-import com.hb.test.http.WorkerRequest;
-import com.hb.test.http.WorkerResponse;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

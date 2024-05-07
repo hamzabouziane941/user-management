@@ -5,4 +5,5 @@ app-config:
       client-id: organization-management
       client-secret: eQqBbzIMTrEBGolGWIFfFp31BkkKfjoq
   url:
-    organization-subscription: http://localhost:8081
+    - organization-subscription: http://localhost:8081
+    - optimization: http://localhost:8082

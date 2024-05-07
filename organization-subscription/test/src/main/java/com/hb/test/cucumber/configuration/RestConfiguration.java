@@ -1,4 +1,4 @@
-package com.hb.test.configuration;
+package com.hb.test.cucumber.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

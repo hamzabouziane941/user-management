@@ -1,4 +1,4 @@
-package com.hb.test.http;
+package com.hb.test.cucumber.http;
 
 public record WorkerResponse(int status, String body) {
 

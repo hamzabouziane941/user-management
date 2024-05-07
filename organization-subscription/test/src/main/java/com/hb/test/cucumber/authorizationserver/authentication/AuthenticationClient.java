@@ -1,6 +1,6 @@
-package com.hb.test.authorizationserver.authentication;
+package com.hb.test.cucumber.authorizationserver.authentication;
 
-import com.hb.test.authorizationserver.AuthorizationServerProperties;
+import com.hb.test.cucumber.authorizationserver.AuthorizationServerProperties;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

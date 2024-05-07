@@ -1,4 +1,4 @@
-package com.hb.test.http;
+package com.hb.test.cucumber.http;
 
 import java.net.URI;
 import java.util.Collections;

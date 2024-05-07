@@ -1,4 +1,4 @@
-package com.hb.test.authorizationserver.authentication;
+package com.hb.test.cucumber.authorizationserver.authentication;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

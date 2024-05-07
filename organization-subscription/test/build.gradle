@@ -31,6 +31,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
 	implementation 'org.apache.commons:commons-lang3:3.14.0'
+	implementation 'org.yaml:snakeyaml:2.2'
+
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -40,6 +42,11 @@ dependencies {
 	implementation "io.cucumber:cucumber-java:${cucumberVersion}"
 	implementation "io.cucumber:cucumber-spring:${cucumberVersion}"
 	implementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+
+	implementation 'com.intuit.karate:karate-junit5:1.4.1'
+	implementation 'com.intuit.karate:karate-apache:0.9.6'
+
+
 
 	testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
 	testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
@@ -61,6 +68,15 @@ tasks.register('cucumberCli') {
 					'--plugin', 'html:target/cucumber-report.html',
 					'--glue', 'com.hb.test',
 					'src/main/resources/cucumber']
+		}
+	}
+}
+
+sourceSets {
+	test {
+		resources {
+			srcDir file('src/test/java')
+			exclude '**/*.java'
 		}
 	}
 }

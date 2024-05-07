@@ -1,4 +1,4 @@
-package com.hb.test.http.config;
+package com.hb.test.cucumber.http.config;
 
 import java.util.Map;
 import lombok.RequiredArgsConstructor;

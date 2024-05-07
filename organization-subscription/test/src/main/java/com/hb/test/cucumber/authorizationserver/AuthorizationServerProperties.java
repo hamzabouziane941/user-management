@@ -1,4 +1,4 @@
-package com.hb.test.authorizationserver;
+package com.hb.test.cucumber.authorizationserver;
 
 
 import lombok.Getter;
