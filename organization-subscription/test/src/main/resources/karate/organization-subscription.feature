@@ -5,7 +5,6 @@ Feature: [organization-subscription-api] create organization
 
   Scenario: [organization-subscription-api] create valid organization
     Given path '/organizations'
-    When method POST
     And request
     """
     {
@@ -14,4 +13,5 @@ Feature: [organization-subscription-api] create organization
       "mail": "contact@test-organization.com"
     }
     """
+    When method POST
     Then status 200
