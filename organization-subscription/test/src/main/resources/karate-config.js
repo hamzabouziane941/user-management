@@ -1,9 +1,6 @@
 function loadKarateConfig() {
 
-  const KarateContextClass = Java.type('com.hb.test.karate.KarateContext');
-  const karateContext = KarateContextClass.getInstance();
-  var config = {
-     organizationSubscription: karateContext.url("organization-subscription"),
-  }
-  return config;
+  const HttpConfiguration = Java.type('com.hb.test.common.HttpConfiguration');
+  karate.log('Api base urls : ', HttpConfiguration.urls());
+  return HttpConfiguration.urls();
 }

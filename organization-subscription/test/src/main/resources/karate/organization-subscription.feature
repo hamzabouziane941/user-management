@@ -1,7 +1,7 @@
 Feature: [organization-subscription-api] create organization
 
   Background:
-    * url organizationSubscription
+    * url organization-subscription
 
   Scenario: [organization-subscription-api] create valid organization
     Given path '/organizations'

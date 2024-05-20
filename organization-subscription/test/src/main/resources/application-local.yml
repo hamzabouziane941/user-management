@@ -1,0 +1,6 @@
+KEYCLOAK_CLIENT_ID: http://localhost:8080
+KEYCLOAK_CLIENT_SECRET: organization-management
+KEYCLOAK_BASE_URL: eQqBbzIMTrEBGolGWIFfFp31BkkKfjoq
+
+ORGANIZATION_SUBSCRIPTION_URL: http://localhost:8081
+OPTIMIZATION_URL: http://localhost:8082

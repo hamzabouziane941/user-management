@@ -2,12 +2,12 @@ package com.hb.test.cucumber.http;
 
 import static java.util.Objects.isNull;
 
+import com.hb.test.common.HttpConfiguration;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 public class WorkerClient {
 
   private final CloseableHttpClient httpClient;
-  private final Map<String, String> urls;
+  private final HttpConfiguration httpConfiguration;
 
   public WorkerResponse sendRequest(WorkerRequest workerRequest) throws IOException {
     URI uri = mapToUri(workerRequest);
@@ -40,7 +40,7 @@ public class WorkerClient {
   }
 
   private URI mapToUri(WorkerRequest workerRequest) {
-    String url = urls.get(workerRequest.getUrlId());
+    String url = httpConfiguration.getUrl(workerRequest.getUrlId());
     try {
       URIBuilder uriBuilder = new URIBuilder(url);
       List<String> pathSegments = new ArrayList<>();

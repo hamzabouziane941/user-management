@@ -1,9 +1,9 @@
 app-config:
   authorization-server:
-      type: keycloak
-      base-url: http://localhost:8080
-      client-id: organization-management
-      client-secret: eQqBbzIMTrEBGolGWIFfFp31BkkKfjoq
+    type: keycloak
+    base-url: ${KEYCLOAK_BASE_URL}
+    client-id: ${KEYCLOAK_CLIENT_ID}
+    client-secret: ${KEYCLOAK_CLIENT_SECRET}
   url:
-    - organization-subscription: http://localhost:8081
-    - optimization: http://localhost:8082
+    - organization-subscription: ${ORGANIZATION_SUBSCRIPTION_URL}
+    - optimization: ${OPTIMIZATION_URL}
