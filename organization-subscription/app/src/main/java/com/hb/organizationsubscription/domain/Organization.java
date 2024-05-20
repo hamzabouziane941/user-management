@@ -9,6 +9,7 @@ public class Organization {
   private String name;
   @Getter
   private String login;
+
   private String mail;
 
 }
