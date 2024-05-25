@@ -1,0 +1,25 @@
+databaseChangeLog:
+- changeSet:
+    id: 1716673081981-1
+    author: asus pro (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: organizationPK
+            name: id
+            type: UUID
+        - column:
+            name: login
+            type: VARCHAR(255)
+        - column:
+            name: mail
+            type: VARCHAR(255)
+        - column:
+            name: name
+            type: VARCHAR(255)
+        tableName: organization
+

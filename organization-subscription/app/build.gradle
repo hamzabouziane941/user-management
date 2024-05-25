@@ -2,10 +2,13 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.liquibase.gradle' version '2.2.2'
+    id 'org.jetbrains.kotlin.plugin.jpa' version "2.0.0"
 }
 
 group = 'com.hb'
 version = '0.0.1-SNAPSHOT'
+
 
 java {
     sourceCompatibility = '21'
@@ -13,6 +16,7 @@ java {
 
 ext {
     mapstructVersion = "1.6.0.Beta1"
+    currentTimestamp = new Date().format("yyyyMMddHHmmss")
 }
 
 configurations {
@@ -26,19 +30,54 @@ repositories {
     mavenCentral()
 }
 
+apply plugin: 'org.liquibase.gradle'
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'com.hb:error-management:0.0.1'
+
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
+
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.postgresql:postgresql:42.7.3'
+
+    liquibaseRuntime 'info.picocli:picocli:4.7.6'
+    liquibaseRuntime 'org.liquibase.ext:liquibase-hibernate6:4.28.0'
+    liquibaseRuntime 'org.postgresql:postgresql:42.7.3'
+    liquibaseRuntime 'org.springframework.boot:spring-boot-starter-data-jpa'
+    liquibaseRuntime sourceSets.main.output
+
+
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+liquibase {
+    activities {
+        register("main") {
+            changeLogFile "src/main/resources/migration/changelog/${currentTimestamp}_changelog.yml"
+            url 'jdbc:postgresql://localhost:5433/organization_subscription'
+            referenceUrl 'hibernate:spring:com.hb.organizationsubscription.adapters.driven.database?' +
+                    'dialect=org.hibernate.dialect.PostgreSQLDialect&amp;' +
+                    'hibernate.physical_naming_strategy=org.hibernate.model.naming.PhysicalNamingStrategyStandardImpl&amp;' +
+                    'hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy'
+            username 'postgres'
+            password 'secret'
+            driver 'org.postgresql.Driver'
+        }
+    }
+    runList = 'main'
 }
 
 tasks.named('test') {
