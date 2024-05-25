@@ -1,0 +1,7 @@
+SERVER_PORT: 8081
+DATABASE_URL: jdbc:postgresql://localhost:5433/organization_subscription
+DATABASE_USERNAME: postgres
+DATABASE_PASSWORD: secret
+KEYCLOAK_BASE_URL: http://localhost:8080
+KEYCLOAK_CLIENT_ID: organization-management
+KEYCLOAK_CLIENT_SECRET: eQqBbzIMTrEBGolGWIFfFp31BkkKfjoq

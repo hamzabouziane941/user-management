@@ -1,12 +1,12 @@
 server:
-  port: 8081
+  port: ${SERVER_PORT}
 spring:
   application:
     name: organization-subscription
   datasource:
-    url: jdbc:postgresql://localhost:5433/organization_subscription
-    username: postgres
-    password: secret
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -19,6 +19,6 @@ spring:
     change-log: classpath:migration/db.changelog-master.yml
 
 keycloak:
-  base-url: http://localhost:8080
-  client-id: organization-management
-  client-secret: eQqBbzIMTrEBGolGWIFfFp31BkkKfjoq
+  base-url: ${KEYCLOAK_BASE_URL}
+  client-id: ${KEYCLOAK_CLIENT_ID}
+  client-secret: ${KEYCLOAK_CLIENT_SECRET}
