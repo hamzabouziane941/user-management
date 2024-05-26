@@ -5,5 +5,5 @@ import com.hb.organizationsubscription.domain.Organization;
 
 public interface CreateOrganizationUseCase {
 
-  void createOrganization(Organization organization) throws OrganizationCreationException;
+  Organization createOrganization(Organization organization) throws OrganizationCreationException;
 }

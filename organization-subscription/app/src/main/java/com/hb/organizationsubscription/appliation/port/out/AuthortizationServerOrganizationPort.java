@@ -3,7 +3,7 @@ package com.hb.organizationsubscription.appliation.port.out;
 import com.hb.organizationsubscription.appliation.exception.OrganizationCreationException;
 import com.hb.organizationsubscription.domain.Organization;
 
-public interface CreateOrganizationPort {
+public interface AuthortizationServerOrganizationPort {
 
-  void createOrganization(Organization organization) throws OrganizationCreationException;
+  void create(Organization organization) throws OrganizationCreationException;
 }

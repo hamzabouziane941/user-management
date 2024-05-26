@@ -2,7 +2,7 @@ package com.hb.organizationsubscription.adapters.driven.keycloak;
 
 import com.hb.organizationsubscription.adapters.driven.keycloak.authentication.AuthenticationClient;
 import com.hb.organizationsubscription.appliation.exception.OrganizationCreationException;
-import com.hb.organizationsubscription.appliation.port.out.CreateOrganizationPort;
+import com.hb.organizationsubscription.appliation.port.out.AuthortizationServerOrganizationPort;
 import com.hb.organizationsubscription.domain.Organization;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class KeycloakAdapter implements CreateOrganizationPort {
+public class KeycloakAdapter implements AuthortizationServerOrganizationPort {
 
   @Value("${keycloak.base-url}")
   private String keycloakBaseUrl;
@@ -25,7 +25,7 @@ public class KeycloakAdapter implements CreateOrganizationPort {
   private final AuthenticationClient authenticationClient;
 
   @Override
-  public void createOrganization(Organization organization) throws OrganizationCreationException {
+  public void create(Organization organization) throws OrganizationCreationException {
     String accessToken = authenticationClient.getAccessToken();
     try {
       restTemplate.postForEntity(buildRealmCreationUrl(),

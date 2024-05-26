@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'org.liquibase.gradle' version '2.2.2'
+    id "org.openapi.generator" version "7.6.0"
 }
 
 group = 'com.hb'
@@ -32,16 +33,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'com.hb:error-management:0.0.1'
-
-
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
 
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.postgresql:postgresql:42.7.3'
@@ -52,11 +51,21 @@ dependencies {
     liquibaseRuntime 'org.springframework.boot:spring-boot-starter-data-jpa'
     liquibaseRuntime sourceSets.main.output
 
-
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generate-resources'
+        }
+    }
 }
 
 liquibase {
@@ -75,6 +84,26 @@ liquibase {
     }
     runList = 'main'
 }
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$rootDir/src/main/resources/apidoc/apiSpecs.yml"
+    outputDir = "$rootDir/build/generate-resources/main"
+    apiPackage = "com.hb.openapi.api"
+    invokerPackage = "com.hb.openapi.invoker"
+    modelPackage = "com.hb.openapi.model"
+    configOptions = [
+            useJakartaEe           : "true",
+            delegeatePattern       : "true",
+            library                : "spring-boot",
+            interfaceOnly          : "true",
+            serializableModel      : "true",
+            generateSupportingFiles: "true",
+            unhandledException     : "true",
+    ]
+}
+
+compileJava.dependsOn "openApiGenerate"
 
 tasks.named('test') {
     useJUnitPlatform()
