@@ -1,7 +1,6 @@
 package com.hb.organizationsubscription.adapters.driving;
 
-import com.hb.openapi.api.OrganizationsApi;
-import com.hb.openapi.model.OrganizationDto;
+import com.hb.organizationsubscription.adapters.driving.dto.OrganizationDto;
 import com.hb.organizationsubscription.adapters.driving.mapper.OrganizationDtoMapper;
 import com.hb.organizationsubscription.appliation.port.in.CreateOrganizationUseCase;
 import com.hb.organizationsubscription.domain.Organization;
@@ -13,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class OrganizationController implements OrganizationsApi {
+public class OrganizationController implements OrganizationApi {
 
   private final CreateOrganizationUseCase createOrganizationUseCase;
 
   public ResponseEntity<OrganizationDto> createOrganization(
-      @RequestBody OrganizationDto organizationDto
-  ) throws Exception {
+      @RequestBody OrganizationDto organizationDto)
+      throws Exception {
     OrganizationDtoMapper organizationDtoMapper = Mappers.getMapper(OrganizationDtoMapper.class);
     Organization organization = organizationDtoMapper.organizationDtoToOrganization(
         organizationDto);

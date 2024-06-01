@@ -1,6 +1,6 @@
 package com.hb.organizationsubscription.adapters.driving.mapper;
 
-import com.hb.openapi.model.OrganizationDto;
+import com.hb.organizationsubscription.adapters.driving.dto.OrganizationDto;
 import com.hb.organizationsubscription.domain.Organization;
 import org.mapstruct.Mapper;
 
