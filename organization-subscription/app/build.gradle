@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'org.liquibase.gradle' version '2.2.2'
+    id 'jacoco'
 }
 
 group = 'com.hb'
@@ -86,4 +87,17 @@ liquibase {
 
 tasks.named('test') {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    reportsDirectory = layout.buildDirectory.dir('jacoco/coverage')
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.outputLocation = layout.buildDirectory.dir('jacoco/coverage/html')
+        xml.outputLocation = layout.buildDirectory.dir('jacoco/coverage/xml/jacocoTestReport.xml').get().asFile
+    }
 }
